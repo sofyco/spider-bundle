@@ -18,12 +18,12 @@ final class SpiderExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $parser = new Definition(Parser::class);
-        $container->setDefinition(ParserInterface::class, $parser);
-
         $loader = new Definition(HttpClientLoader::class);
         $loader->setAutowired(true);
         $container->setDefinition(LoaderInterface::class, $loader);
+
+        $parser = new Definition(Parser::class);
+        $container->setDefinition(ParserInterface::class, $parser);
 
         $scraper = new Definition(Scraper::class);
         $scraper->setAutowired(true);
