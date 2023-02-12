@@ -6,9 +6,9 @@ use Sofyco\Spider\Crawler\CrawlerInterface;
 use Sofyco\Spider\Parser\ParserInterface;
 use Sofyco\Spider\Scraper\ScraperInterface;
 
-final class ExampleService
+final readonly class ExampleService
 {
-    public function __construct(public readonly CrawlerInterface $crawler, public readonly ScraperInterface $scraper, public readonly ParserInterface $parser)
+    public function __construct(public CrawlerInterface $crawler, public ScraperInterface $scraper, public ParserInterface $parser)
     {
     }
 }

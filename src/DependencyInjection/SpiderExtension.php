@@ -4,8 +4,6 @@ namespace Sofyco\Bundle\SpiderBundle\DependencyInjection;
 
 use Sofyco\Spider\Crawler\Crawler;
 use Sofyco\Spider\Crawler\CrawlerInterface;
-use Sofyco\Spider\Loader\HttpClientLoader;
-use Sofyco\Spider\Loader\LoaderInterface;
 use Sofyco\Spider\Parser\Parser;
 use Sofyco\Spider\Parser\ParserInterface;
 use Sofyco\Spider\Scraper\Scraper;
@@ -18,10 +16,6 @@ final class SpiderExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
-        $loader = new Definition(HttpClientLoader::class);
-        $loader->setAutowired(true);
-        $container->setDefinition(LoaderInterface::class, $loader);
-
         $parser = new Definition(Parser::class);
         $container->setDefinition(ParserInterface::class, $parser);
 
