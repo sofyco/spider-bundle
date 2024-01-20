@@ -2,6 +2,8 @@
 
 namespace Sofyco\Bundle\SpiderBundle\Tests\App;
 
+use Sofyco\Bundle\SpiderBundle\SpiderBundle;
+use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
@@ -11,8 +13,8 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     public function registerBundles(): iterable
     {
-        yield new \Symfony\Bundle\FrameworkBundle\FrameworkBundle();
-        yield new \Sofyco\Bundle\SpiderBundle\SpiderBundle();
+        yield new FrameworkBundle();
+        yield new SpiderBundle();
     }
 
     protected function configureContainer(ContainerConfigurator $container): void
