@@ -13,11 +13,11 @@
     ],
     "require": {
         "php": "^8.3",
-        "sofyco/spider": "^2.0",
-        "symfony/framework-bundle": "^7.0"
+        "sofyco/spider": "^2.0.1",
+        "symfony/framework-bundle": "^7.1"
     },
     "require-dev": {
-        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan": "^1.12",
         "phpunit/phpunit": "^10.5"
     },
     "autoload": {
