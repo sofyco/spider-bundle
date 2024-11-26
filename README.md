@@ -6,6 +6,8 @@
 
 ## Installation
 
+A Symfony bundle that integrates the [sofyco/spider](https://github.com/sofyco/spider) Crawler + Scraper + Parser library
+
 ```bash
 composer req sofyco/spider-bundle
 ```
