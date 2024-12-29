@@ -24,9 +24,9 @@ final class ContentResult
     {
         $this->url = $url;
         $this->image = $image;
-        $this->title = trim($title);
-        $this->description = trim($description);
-        $this->content = trim($content);
+        $this->title = $title ? trim($title) : null;
+        $this->description = $description ? trim($description) : null;
+        $this->content = $content ? trim($content) : null;
         $this->tags = array_filter(array_map('trim', $tags));
         $this->categories = array_filter(array_map('trim', $categories));
         $this->publishedAt = $publishedAt;
