@@ -24,11 +24,11 @@ final class ContentResult
     {
         $this->url = $url;
         $this->image = $image;
-        $this->title = $title;
-        $this->description = $description;
-        $this->content = $content;
-        $this->tags = $tags;
-        $this->categories = $categories;
+        $this->title = trim($title);
+        $this->description = trim($description);
+        $this->content = trim($content);
+        $this->tags = array_filter(array_map('trim', $tags));
+        $this->categories = array_filter(array_map('trim', $categories));
         $this->publishedAt = $publishedAt;
     }
 }
