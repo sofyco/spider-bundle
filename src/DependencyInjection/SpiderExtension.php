@@ -2,15 +2,12 @@
 
 namespace Sofyco\Bundle\SpiderBundle\DependencyInjection;
 
-use Sofyco\Spider\Crawler\Crawler;
-use Sofyco\Spider\Crawler\CrawlerInterface;
-use Sofyco\Spider\Parser\Parser;
-use Sofyco\Spider\Parser\ParserInterface;
-use Sofyco\Spider\Scraper\Scraper;
-use Sofyco\Spider\Scraper\ScraperInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Extension\Extension;
+use Sofyco\Bundle\SpiderBundle\MessageHandler\Scraper\HTML;
+use Sofyco\Bundle\SpiderBundle\MessageHandler\Scraper\XML;
+use Sofyco\Spider\Crawler\{Crawler, CrawlerInterface};
+use Sofyco\Spider\Parser\{Parser, ParserInterface};
+use Sofyco\Spider\Scraper\{Scraper, ScraperInterface};
+use Symfony\Component\DependencyInjection\{ContainerBuilder, Definition, Extension\Extension};
 
 final class SpiderExtension extends Extension
 {
@@ -26,5 +23,28 @@ final class SpiderExtension extends Extension
         $crawler = new Definition(Crawler::class);
         $crawler->setAutowired(true);
         $container->setDefinition(CrawlerInterface::class, $crawler);
+
+        foreach ($this->getMessageHandlers() as $messageHandlerClassName) {
+            $messageHandler = new Definition($messageHandlerClassName);
+            $messageHandler->setAutowired(true);
+            $messageHandler->setAutoconfigured(true);
+            $container->setDefinition($messageHandlerClassName, $messageHandler);
+        }
+    }
+
+    private function getMessageHandlers(): array
+    {
+        return [
+            XML\ParseRSSHandler::class,
+            XML\ParseSitemapHandler::class,
+            HTML\ParseCategoriesHandler::class,
+            HTML\ParseContentByUrlHandler::class,
+            HTML\ParseContentHandler::class,
+            HTML\ParseDescriptionHandler::class,
+            HTML\ParseImageHandler::class,
+            HTML\ParsePublishedTimeHandler::class,
+            HTML\ParseTagsHandler::class,
+            HTML\ParseTitleHandler::class,
+        ];
     }
 }

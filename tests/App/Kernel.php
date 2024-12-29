@@ -19,7 +19,14 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
 
     protected function configureContainer(ContainerConfigurator $container): void
     {
-        $container->extension('framework', ['test' => true]);
+        $container->extension('framework', [
+            'test' => true,
+            'messenger' => [
+                'transports' => [
+                    'sync' => 'in-memory://',
+                ],
+            ],
+        ]);
 
         $container->services()->set(Service\ExampleService::class, Service\ExampleService::class)->autowire()->public();
     }
