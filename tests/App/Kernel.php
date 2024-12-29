@@ -29,5 +29,6 @@ final class Kernel extends \Symfony\Component\HttpKernel\Kernel
         ]);
 
         $container->services()->set(Service\ExampleService::class, Service\ExampleService::class)->autowire()->public();
+        $container->services()->set(Service\ParseTitleService::class, Service\ParseTitleService::class)->autowire()->public();
     }
 }
