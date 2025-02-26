@@ -37,6 +37,7 @@ final class SpiderExtension extends Extension
         return [
             XML\ParseRSSHandler::class,
             XML\ParseSitemapHandler::class,
+            HTML\ParseDeepLinksHandler::class,
             HTML\ParseCategoriesHandler::class,
             HTML\ParseContentByUrlHandler::class,
             HTML\ParseContentHandler::class,
