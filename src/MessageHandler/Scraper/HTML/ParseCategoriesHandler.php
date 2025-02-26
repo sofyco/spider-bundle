@@ -17,6 +17,7 @@ final readonly class ParseCategoriesHandler
     {
         $this->nodes = [
             new Node(type: Type::TEXT, selector: '.entry-categories a'),
+            new Node(type: Type::ATTRIBUTE, selector: 'meta[property="article:section"]', attribute: 'content'),
         ];
     }
 

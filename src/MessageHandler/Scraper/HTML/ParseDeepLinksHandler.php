@@ -28,7 +28,7 @@ final readonly class ParseDeepLinksHandler
             /** @var ContentResult $contentResult */
             $contentResult = $this->bus->dispatch(new ParseContentByUrl(url: $item->getUrl()))->last(HandledStamp::class)?->getResult();
 
-            if (empty($contentResult->image) && empty($contentResult->publishedAt)) {
+            if (empty($contentResult->image) && empty($contentResult->categories) && empty($contentResult->publishedAt)) {
                 continue;
             }
 
