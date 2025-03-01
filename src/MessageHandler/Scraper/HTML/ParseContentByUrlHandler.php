@@ -11,31 +11,24 @@ use Sofyco\Bundle\SpiderBundle\Message\Scraper\HTML\ParseImage;
 use Sofyco\Bundle\SpiderBundle\Message\Scraper\HTML\ParsePublishedTime;
 use Sofyco\Bundle\SpiderBundle\Message\Scraper\HTML\ParseTags;
 use Sofyco\Bundle\SpiderBundle\Message\Scraper\HTML\ParseTitle;
-use Symfony\Component\HttpFoundation\{Request, Response};
+use Sofyco\Spider\Context;
+use Sofyco\Spider\Scraper\ScraperInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Messenger\Stamp\HandledStamp;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsMessageHandler]
 final readonly class ParseContentByUrlHandler
 {
-    public function __construct(private MessageBusInterface $bus, private HttpClientInterface $httpClient)
+    public function __construct(private MessageBusInterface $bus, private ScraperInterface $scraper)
     {
     }
 
     public function __invoke(ParseContentByUrl $message): ?ContentResult
     {
         try {
-            $response = $this->httpClient->request(method: Request::METHOD_GET, url: $message->url);
-
-            if ($response->getStatusCode() !== Response::HTTP_OK) {
-                return null;
-            }
-
-            $html = $response->getContent();
-        } catch (TransportExceptionInterface $exception) {
+            $html = $this->scraper->getResult(context: new Context(url: $message->url));
+        } catch (\Throwable $exception) {
             return null;
         }
 

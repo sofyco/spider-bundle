@@ -4,17 +4,16 @@ namespace Sofyco\Bundle\SpiderBundle\MessageHandler\Scraper\XML;
 
 use Sofyco\Bundle\SpiderBundle\Message\Scraper\ContentResult;
 use Sofyco\Bundle\SpiderBundle\Message\Scraper\XML\ParseRSS;
-use Symfony\Component\HttpFoundation\{Request, Response};
+use Sofyco\Spider\Context;
+use Sofyco\Spider\Scraper\ScraperInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 #[AsMessageHandler]
 final readonly class ParseRSSHandler
 {
     private const string PLACEHOLDER_PAGE = '{{page}}';
 
-    public function __construct(private HttpClientInterface $httpClient)
+    public function __construct(private ScraperInterface $scraper)
     {
     }
 
@@ -85,14 +84,8 @@ final readonly class ParseRSSHandler
     private function getContent(string $url): ?string
     {
         try {
-            $response = $this->httpClient->request(method: Request::METHOD_GET, url: $url);
-
-            if ($response->getStatusCode() !== Response::HTTP_OK) {
-                return null;
-            }
-
-            return $this->getTransformedContent(content: $response->getContent());
-        } catch (TransportExceptionInterface $exception) {
+            return $this->getTransformedContent(content: $this->scraper->getResult(context: new Context(url: $url)));
+        } catch (\Throwable $exception) {
             return null;
         }
     }
