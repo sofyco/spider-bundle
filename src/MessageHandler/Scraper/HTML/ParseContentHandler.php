@@ -17,6 +17,7 @@ final readonly class ParseContentHandler
     {
         $this->nodes = [
             new Node(type: Type::HTML, selector: '.article-body'),
+            new Node(type: Type::HTML, selector: '.b-post__description_text'),
             new Node(type: Type::LARGEST_NESTED_CONTENT, selector: 'body'),
         ];
     }
