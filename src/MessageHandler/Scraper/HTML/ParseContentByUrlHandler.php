@@ -44,10 +44,10 @@ final readonly class ParseContentByUrlHandler
         /** @var string|null $content */
         $content = $this->bus->dispatch(new ParseContent(html: $html))->last(HandledStamp::class)?->getResult();
 
-        /** @var array $tags */
+        /** @var string[] $tags */
         $tags = $this->bus->dispatch(new ParseTags(html: $html))->last(HandledStamp::class)?->getResult();
 
-        /** @var array $categories */
+        /** @var string[] $categories */
         $categories = $this->bus->dispatch(new ParseCategories(html: $html))->last(HandledStamp::class)?->getResult();
 
         /** @var \DateTime|null $publishedAt */

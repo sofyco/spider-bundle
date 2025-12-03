@@ -10,6 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class SpiderExtensionTest extends KernelTestCase
 {
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        restore_exception_handler();
+    }
+
     public function testInjectedServices(): void
     {
         /** @var ExampleService $service */

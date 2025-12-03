@@ -7,6 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 final class ParseTitleHandlerTest extends KernelTestCase
 {
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+
+        restore_exception_handler();
+    }
+
     public function testExample(): void
     {
         /** @var ParseTitleService $service */
@@ -14,6 +21,6 @@ final class ParseTitleHandlerTest extends KernelTestCase
 
         $html = '<div><h1>MyTitle</h1><span>Test</span></div>';
 
-        self::assertSame(expected: 'MyTitle', actual: $service->getTitle(html: $html));
+        self::assertSame('MyTitle', $service->getTitle(html: $html));
     }
 }

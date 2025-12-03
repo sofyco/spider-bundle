@@ -32,6 +32,9 @@ final class SpiderExtension extends Extension
         }
     }
 
+    /**
+     * @return class-string[]
+     */
     private function getMessageHandlers(): array
     {
         return [

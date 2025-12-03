@@ -107,6 +107,10 @@ final readonly class ParseRSSHandler
     {
         $attributes = $element->attributes();
 
-        return $attributes?->count() && $attributes->{$attribute} ? (string) $attributes->{$attribute} : null;
+        if ($attributes?->count() && $attributes->{$attribute} && is_string($attributes->{$attribute})) {
+            return (string) $attributes->{$attribute};
+        }
+
+        return null;
     }
 }
