@@ -28,8 +28,9 @@ final readonly class ParseSitemapHandler
         }
 
         $xml = new \SimpleXMLElement(data: $content, options: \LIBXML_NOBLANKS | \LIBXML_NOCDATA | \LIBXML_ERR_WARNING);
+        $items = $xml->url ?? [];
 
-        foreach ($xml->url as $item) {
+        foreach ($items as $item) {
             $url = (string) $item->loc;
 
             if (empty($url)) {
