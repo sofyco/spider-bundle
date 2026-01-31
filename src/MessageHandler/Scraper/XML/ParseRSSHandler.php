@@ -42,8 +42,9 @@ final readonly class ParseRSSHandler
     private function getItems(string $xml): iterable
     {
         $data = new \SimpleXMLElement(data: $xml, options: \LIBXML_NOBLANKS | \LIBXML_NOCDATA | \LIBXML_ERR_WARNING);
+        $items = $data->channel?->item ?? [];
 
-        foreach ($data->channel?->item as $item) {
+        foreach ($items as $item) {
             $url = $this->getElementText(element: $item->link);
 
             if (empty($url)) {
