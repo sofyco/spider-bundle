@@ -16,6 +16,7 @@ final readonly class ParseContentHandler
     public function __construct(private ParserInterface $parser)
     {
         $this->nodes = [
+            new Node(type: Type::HTML, selector: '#mvp-content-main'),
             new Node(type: Type::HTML, selector: '.article-body'),
             new Node(type: Type::HTML, selector: '.b-post__description_text'),
             new Node(type: Type::LARGEST_NESTED_CONTENT, selector: 'body'),
