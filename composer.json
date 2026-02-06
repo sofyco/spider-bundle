@@ -1,7 +1,7 @@
 {
     "name": "sofyco/spider-bundle",
     "type": "symfony-bundle",
-    "version": "3.0.2",
+    "version": "3.0.3",
     "description": "Symfony Spider Bundle",
     "keywords": ["php", "symfony", "crawler", "scraper", "parser"],
     "homepage": "https://github.com/sofyco/spider-bundle",

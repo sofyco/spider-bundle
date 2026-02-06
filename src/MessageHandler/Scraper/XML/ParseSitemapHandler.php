@@ -27,7 +27,12 @@ final readonly class ParseSitemapHandler
             return;
         }
 
-        $xml = new \SimpleXMLElement(data: $content, options: \LIBXML_NOBLANKS | \LIBXML_NOCDATA | \LIBXML_ERR_WARNING);
+        try {
+            $xml = new \SimpleXMLElement(data: $content, options: \LIBXML_NOBLANKS | \LIBXML_NOCDATA | \LIBXML_ERR_WARNING);
+        } catch (\Throwable $exception) {
+            return;
+        }
+
         $items = $xml->url ?? [];
 
         foreach ($items as $item) {
